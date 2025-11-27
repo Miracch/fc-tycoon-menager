@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, Text, TouchableOpacity, StyleSheet, StatusBar } from 'react-native';
+import { SafeAreaView, View, Text, TouchableOpacity, StyleSheet, StatusBar } from './native-shim';
 import { GameProvider } from './GameContext';
 import { OfficeView } from './components/OfficeView';
 import { SquadView } from './components/SquadView';

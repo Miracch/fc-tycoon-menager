@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Modal, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Modal, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from '../native-shim';
 import { useGame } from '../GameContext';
 import { LEAGUE_NAMES, getStadiumCapacity } from '../constants';
 import { formatCurrency } from '../utils/format';

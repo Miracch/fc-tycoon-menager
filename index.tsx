@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppRegistry } from 'react-native';
+import { AppRegistry } from './native-shim';
 import App from './App';
 
 const rootTag = document.getElementById('root');

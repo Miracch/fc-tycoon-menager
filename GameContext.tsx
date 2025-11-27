@@ -1,6 +1,6 @@
 
 import React, { createContext, useContext, useReducer, useEffect, ReactNode } from 'react';
-import { Alert } from 'react-native';
+import { Alert } from './native-shim';
 import { GameState, GameAction, GameContextType } from './types';
 import { INITIAL_FACILITIES, INITIAL_FANS, INITIAL_MONEY, INITIAL_PLAYERS, generateMarketPlayers, calculatePlayerValue, calculateWage, getStadiumCapacity, getMinLeagueForStadiumLevel, generateLeagueTable, simulateLeagueWeek, generateRandomPlayer, RANDOM_EVENTS, ACHIEVEMENTS, generateEuroTable } from './constants';
 
