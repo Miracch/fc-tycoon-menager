@@ -1,5 +1,6 @@
 
 import React, { createContext, useContext, useReducer, useEffect, ReactNode } from 'react';
+import { Alert } from 'react-native';
 import { GameState, GameAction, GameContextType } from './types';
 import { INITIAL_FACILITIES, INITIAL_FANS, INITIAL_MONEY, INITIAL_PLAYERS, generateMarketPlayers, calculatePlayerValue, calculateWage, getStadiumCapacity, getMinLeagueForStadiumLevel, generateLeagueTable, simulateLeagueWeek, generateRandomPlayer, RANDOM_EVENTS, ACHIEVEMENTS, generateEuroTable } from './constants';
 
@@ -34,12 +35,15 @@ const baseState: GameState = {
 
 // Load from LocalStorage
 const loadState = (): GameState => {
+    const hasLocalStorage = typeof localStorage !== 'undefined';
     try {
-        const saved = localStorage.getItem('fc_tycoon_save_v1');
-        if (saved) {
-            const parsed = JSON.parse(saved);
-            // Verify structure or merge with defaults to prevent crashes on updates
-            return { ...baseState, ...parsed };
+        if (hasLocalStorage) {
+            const saved = localStorage.getItem('fc_tycoon_save_v1');
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                // Verify structure or merge with defaults to prevent crashes on updates
+                return { ...baseState, ...parsed };
+            }
         }
     } catch (e) {
         console.error("Failed to load save", e);
@@ -738,7 +742,7 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   // Auto-Save Effect
   useEffect(() => {
-      if (state.teamName) {
+      if (state.teamName && typeof localStorage !== 'undefined') {
           localStorage.setItem('fc_tycoon_save_v1', JSON.stringify(state));
       }
   }, [state]);
@@ -760,7 +764,7 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const startingXI = state.players.filter(p => p.isStarting);
     
     if (startingXI.length !== 11) {
-        alert(`Maça çıkmak için İlk 11'de tam 11 oyuncu olmalı! Şu an: ${startingXI.length}`);
+        Alert.alert('Eksik İlk 11', `Maça çıkmak için İlk 11'de tam 11 oyuncu olmalı! Şu an: ${startingXI.length}`);
         return;
     }
 
